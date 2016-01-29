@@ -4,22 +4,23 @@ require('mysql2')
 require('sinatra/activerecord')
 require('shoes')
 require('shoe_stores')
+require('pry')
 
 RSpec.configure do |config|
   config.after(:each) do
-    Shoe.all().each() do |shoe|
+    ShoeBrand.all.each do |shoe|
       shoe.destroy()
     end
-    ShoeStore.all().each() do |shoe_store|
-      shoe_store.destroy()
+    ShoeStore.all.each do |shoe_store|
+      shoe_store.destroy
     end
   end
 end
 
-def create_survey
-  Survey.create({:title => "Health Insurance!"})
+def create_shoe
+  ShoeBrand.create({:name => "Nike"})
 end
 
-def create_question
-  Question.create({:question => "Why does health insurance suck in America?"})
+def create_shoe_store
+  ShoeStore.create({:name => "Nordstom"})
 end
