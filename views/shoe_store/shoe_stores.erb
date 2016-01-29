@@ -1,0 +1,48 @@
+<div class="container">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Shoe Store</th>
+        <th>Actions</th>
+        <th>Tag It</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @shoe_stores.each do |shoe_store|%>
+        <tr>
+          <td><%= shoe_store.name %></td>
+          <td>
+            <div class="col-xs-1">
+              <form class="form-horizontal" role="form" action="/shoe_stores/<%= shoe_store.id %>" method="get">
+                <button type="submit" class="btn btn-link">View</button>
+              </form>
+            </div>
+            <div class="col-xs-1">
+              <form class="form-horizontal" role="form" action="/shoe_stores/<%= shoe_store.id %>/edit" method="get">
+                <button type="submit" class="btn btn-link">Edit</button>
+              </form>
+            </div>
+            <div class="col-xs-1">
+              <form class="form-horizontal" role="form" action="/shoe_stores/<%= shoe_store.id %>" method="post">
+                <input name="_method" type="hidden" value="delete">
+                <button type="submit" class="btn btn-link">Delete</button>
+              </form>
+            </div>
+          </td>
+          <td>
+            <div class="col-xs-0">
+              <form class="form-horizontal" role="form" action="/shoe_stores/<%= shoe_store.id %>/tags" method="post">
+                <select name="tag_id">
+                  <%# @tags.each do |tag|%>
+                    <option value="<%#= tag.id %>"><%#= tag.tag %></option>
+                  <%# end %>
+                </select>
+                <button type="submit" class="btn btn-button">Add</button>
+              </form>
+            </div>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
