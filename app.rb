@@ -48,3 +48,19 @@ delete('/shoe_stores/:id') do
   @shoe_store.delete
   redirect('/shoe_stores')
 end
+
+#====================shoes======================================================
+
+get('/shoe_brands') do
+  @shoes = ShoeBrand.all
+  erb(:"/shoes/shoes")
+end
+
+get('/shoe_brands/new') do
+  erb(:"/shoes/shoes_form")
+end
+
+post('/shoe_brands') do
+  ShoeBrand.create(params)
+  redirect('/shoe_brands')
+end

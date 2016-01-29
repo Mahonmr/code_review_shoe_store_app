@@ -18,6 +18,12 @@ describe('shoe box navigation', {:type => :feature}) do
     expect(page).to have_content('Shoe Store')
   end
 
+  it('takes you to add a shoe store') do
+    visit('/')
+    click_link('Add a Shoe Store', visible: false)
+    expect(page).to have_content('Add a Shoe Store')
+  end
+
   it('takes you to view a shoe store') do
     test_store = create_shoe_store
     visit('/shoe_stores')
@@ -31,6 +37,19 @@ describe('shoe box navigation', {:type => :feature}) do
     click_button('Edit', visible: false)
     expect(page).to have_content('Edit the Shoe Store:')
   end
+
+  it('takes you to view shoe') do
+    visit('/')
+    click_link('View Shoes', visible: false)
+    expect(page).to have_content('Shoe brands')
+  end
+
+  it('takes you to add a shoe brand') do
+    visit('/')
+    click_link('Add a Shoe Brand', visible: false)
+    expect(page).to have_content('Add a Shoe Brand')
+  end
+
 
   describe('CRUD for class shoestore', {:type => :feature}) do
     it('lets you add a shoe store to app') do
@@ -65,6 +84,24 @@ describe('shoe box navigation', {:type => :feature}) do
       fill_in('name', with: ' ')
       click_button('Submit')
       expect(ShoeStore.all.length).to eq(0)
+    end
+  end
+
+  describe('CRUD for class shoe brand', {:type => :feature}) do
+    it('lets you add a shoe brand to app') do
+      visit('/')
+      click_link('Add a Shoe Brand', visible: false)
+      fill_in('name', with: 'Zips')
+      click_button('Submit')
+      expect(page).to have_content('Zips')
+    end
+
+    it('will not create a record if name is left blank') do
+      visit('/')
+      click_link('Add a Shoe Brand', visible: false)
+      fill_in('name', with: ' ')
+      click_button('Submit')
+      expect(ShoeBrand.all.length).to eq(0)
     end
   end
 end
