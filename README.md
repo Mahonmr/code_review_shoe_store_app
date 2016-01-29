@@ -40,8 +40,8 @@ asks for password which is root
 Step 3 create database and verify it is there
 
 ```
-CREATE database shoe_tracker;
-show databases;
+rake db:create
+then go to mysql prompt and type "show databases;" to verify new db is their
 ```
 
 Step 4 run migration to build the tables
