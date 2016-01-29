@@ -21,6 +21,14 @@ def create_shoe
   ShoeBrand.create({:name => "Nike"})
 end
 
+def create_shoe_two
+  ShoeBrand.create({:name => "Adidas"})
+end
+
 def create_shoe_store
   ShoeStore.create({:name => "Nordstom"})
+end
+
+def create_shoe_store_two
+  ShoeStore.create({:name => "Portland Running Company"})
 end
