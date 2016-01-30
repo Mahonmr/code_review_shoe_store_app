@@ -31,11 +31,11 @@
           </td>
           <td>
             <div class="col-xs-0">
-              <form class="form-horizontal" role="form" action="/shoe_stores/<%= shoe_store.id %>/tags" method="post">
-                <select name="tag_id">
-                  <%# @tags.each do |tag|%>
-                    <option value="<%#= tag.id %>"><%#= tag.tag %></option>
-                  <%# end %>
+              <form class="form-horizontal" role="form" action="/shoe_stores/<%= shoe_store.id %>/shoe_brands" method="post">
+                <select name="shoe_brand_id">
+                  <% ShoeBrand.all.each do |shoe|%>
+                    <option value="<%= shoe.id %>"><%= shoe.name %></option>
+                  <% end %>
                 </select>
                 <button type="submit" class="btn btn-button">Add</button>
               </form>

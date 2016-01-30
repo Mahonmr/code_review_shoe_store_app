@@ -10,12 +10,11 @@
     <div class="col-lg-2 col-centered" style="background: #D3D3D3;">
       <h3>Inventory</h3>
       <ul id="padding">
-        <%# @recipe.instructions.each do |instruction| %>
+        <% @shoe_store.shoe_brands.each do |shoes| %>
           <li>
-            <%#= instruction.step %>
-            <%#= instruction.task %>
+            <%= shoes.name %>
           </li>
-        <%# end %>
+        <% end %>
       </ul>
     </div>
   </div>

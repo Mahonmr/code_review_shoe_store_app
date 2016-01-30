@@ -2,7 +2,7 @@ ENV['RACK_ENV'] = 'test'
 require('rspec')
 require('mysql2')
 require('sinatra/activerecord')
-require('shoes')
+require('shoe_brands')
 require('shoe_stores')
 require('pry')
 

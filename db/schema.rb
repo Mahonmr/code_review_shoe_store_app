@@ -11,13 +11,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160129165950) do
+ActiveRecord::Schema.define(version: 20160129233132) do
 
   create_table "shoe_brands", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "shoe_brands_stores", id: false, force: :cascade do |t|
+    t.integer "shoe_brand_id", limit: 4, null: false
+    t.integer "shoe_store_id", limit: 4, null: false
+  end
+
+  add_index "shoe_brands_stores", ["shoe_brand_id", "shoe_store_id"], name: "index_shoe_brands_stores_on_shoe_brand_id_and_shoe_store_id", using: :btree
+  add_index "shoe_brands_stores", ["shoe_store_id", "shoe_brand_id"], name: "index_shoe_brands_stores_on_shoe_store_id_and_shoe_brand_id", using: :btree
 
   create_table "shoe_stores", force: :cascade do |t|
     t.string   "name",       limit: 255
