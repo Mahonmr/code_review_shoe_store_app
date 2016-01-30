@@ -34,7 +34,9 @@
               <form class="form-horizontal" role="form" action="/shoe_stores/<%= shoe_store.id %>/shoe_brands" method="post">
                 <select name="shoe_brand_id">
                   <% ShoeBrand.all.each do |shoe| %>
-                    <option value="<%= shoe.id %>"><%= shoe.name %></option>
+                    <% unless shoe.instore(shoe_store.id) %>
+                      <option value="<%= shoe.id %>"><%= shoe.name %></option>
+                    <% end %>
                   <% end %>
                 </select>
                 <button type="submit" class="btn btn-button">Add</button>

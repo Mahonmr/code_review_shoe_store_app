@@ -3,15 +3,10 @@ class ShoeBrand < ActiveRecord::Base
   before_save :capitalized
   validates :name, :presence => true
 
-  #Todo
-  # def instore(shoe_store_id)
-  #   shoestore = ShoeStore.find(shoe_store_id)
-  #   if self.shoe_stores(shoestore) == ActiveRecord::RecordNotFound
-  #     return nil
-  #   else
-  #     return self.shoe_stores(shoestore)
-  #   end
-  # end
+  def instore(shoe_store_id)
+    shoestore = ShoeStore.find(shoe_store_id)
+    self.shoe_stores.find_by_name(shoestore.name)
+  end
 
   def capitalized
     self.name = self.name.downcase.titleize

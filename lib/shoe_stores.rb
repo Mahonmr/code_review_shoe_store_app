@@ -12,4 +12,10 @@ class ShoeStore < ActiveRecord::Base
     shoebrand = ShoeBrand.find(shoe_brand_id)
     shoestore.shoe_brands << shoebrand
   end
+  
+  def self.delete_shoe_brand(shoe_store_id, shoe_brand_id)
+    shoestore = ShoeStore.find(shoe_store_id)
+    shoebrand = ShoeBrand.find(shoe_brand_id)
+    shoestore.shoe_brands.delete(shoebrand)
+  end
 end

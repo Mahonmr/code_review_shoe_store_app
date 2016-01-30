@@ -13,6 +13,11 @@
         <% @shoe_store.shoe_brands.each do |shoes| %>
           <li>
             <%= shoes.name %>
+            <form class="form-horizontal" role="form" action="<%= "/shoe_stores/#{@shoe_store.id}/shoe_brands/#{shoes.id}" %>" method="post">
+              <input name="_method" type="hidden" value="delete">
+              <input name="id" type="hidden" value="delete">
+              <button type="submit" class="btn btn-link">Delete</button>
+            </form>
           </li>
         <% end %>
       </ul>
