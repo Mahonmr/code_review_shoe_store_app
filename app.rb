@@ -73,6 +73,7 @@ post('/shoe_stores/:shoe_store_id/shoe_brands') do
   redirect('/shoe_stores')
 end
 
+# Todo
 # post('/shoe_stores/:shoe_store_id/shoe_brands/:shoe_brand_id') do
 #   ShoeStore.delete_shoe_brand(params[:shoe_store_id].to_i params[:shoe_brand_id].to_i)
 #   redirect("/shoe_stores/#{params[:shoe_store_id].to_i}")
