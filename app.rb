@@ -1,11 +1,10 @@
-require('sinatra')
-require('sinatra/reloader')
-require('sinatra/activerecord')
-require('./lib/shoe_stores')
-require('./lib/shoe_brands')
-require('mysql2')
-require('pry')
-also_reload('./lib/**/*.rb')
+require 'bundler/setup'
+Bundler.require(:default)
+require 'sinatra/base'
+require 'sinatra/flash'
+Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
+
+enable :sessions
 
 get('/') do
   erb(:index)
@@ -23,7 +22,11 @@ get('/shoe_stores/new') do
 end
 
 post('/shoe_stores') do
-  ShoeStore.create(params)
+  if ShoeStore.create(params).errors.any?
+    flash[:warning] = "Store not saved"
+  else
+    flash[:success] = "Successfully created new shoe store."
+  end
   redirect('/shoe_stores')
 end
 
@@ -39,13 +42,21 @@ end
 
 patch('/shoe_stores/:id') do
   @shoe_store = ShoeStore.find(params[:id].to_i)
-  @shoe_store.update(name: params[:name])
+  if @shoe_store.update(name: params[:name])
+    flash[:success] = "#{@shoe_store.name} was Successfully updated."
+  else
+    flash[:warning] = "Store not updated"
+  end
   redirect('/shoe_stores')
 end
 
 delete('/shoe_stores/:id') do
   @shoe_store = ShoeStore.find(params[:id].to_i)
-  @shoe_store.delete
+  if @shoe_store.delete.errors.any?
+    flash[:warning] = "Store not deleted"
+  else
+    flash[:success] = "Successfully deleted store #{@shoe_store.name}"
+  end
   redirect('/shoe_stores')
 end
 
@@ -61,7 +72,11 @@ get('/shoe_brands/new') do
 end
 
 post('/shoe_brands') do
-  ShoeBrand.create(params)
+  if ShoeBrand.create(params).errors.any?
+    flash[:warning] = "Shoes not saved"
+  else
+    flash[:success] = "Successfully created new shoes."
+  end
   redirect('/shoe_brands')
 end
 
@@ -69,10 +84,12 @@ end
 
 post('/shoe_stores/:shoe_store_id/shoe_brands') do
   ShoeStore.join_shoe_brand(params[:shoe_store_id].to_i, params[:shoe_brand_id].to_i)
+  flash[:success] = "#{ShoeStore.store(params[:shoe_store_id].to_i)} now carries #{ShoeBrand.brand(params[:shoe_brand_id].to_i)}."
   redirect('/shoe_stores')
 end
 
 delete('/shoe_stores/:shoe_store_id/shoe_brands/:shoe_brand_id') do
   ShoeStore.delete_shoe_brand(params[:shoe_store_id].to_i, params[:shoe_brand_id].to_i)
+  flash[:success] = "#{ShoeStore.store(params[:shoe_store_id].to_i)} no longer carries #{ShoeBrand.brand(params[:shoe_brand_id].to_i)}."
   redirect("/shoe_stores/#{params[:shoe_store_id].to_i}")
 end

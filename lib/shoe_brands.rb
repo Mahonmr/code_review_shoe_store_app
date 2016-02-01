@@ -8,6 +8,13 @@ class ShoeBrand < ActiveRecord::Base
     self.shoe_stores.find_by_name(shoestore.name)
   end
 
+  def self.brand(brand_id)
+    shoe_brand = ShoeBrand.find(brand_id)
+    return shoe_brand.name
+  end
+
+  private
+
   def capitalized
     self.name = self.name.downcase.titleize
   end

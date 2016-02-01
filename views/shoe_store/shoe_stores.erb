@@ -1,4 +1,5 @@
 <div class="container">
+
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -7,7 +8,7 @@
         <th>Tag It</th>
       </tr>
     </thead>
-    <tbody>
+    <tbody id="shoe_data">
       <% @shoe_stores.each do |shoe_store|%>
         <tr>
           <td><%= shoe_store.name %></td>
