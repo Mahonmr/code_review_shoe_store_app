@@ -1,10 +1,4 @@
-ENV['RACK_ENV'] = 'test'
 require ('spec_helper')
-require('capybara/rspec')
-require('./app')
-require "pry"
-Capybara.app = Sinatra::Application
-set(:show_exceptions, false)
 
 describe('shoe box navigation', {:type => :feature}) do
   it('takes you to index page') do
@@ -74,9 +68,13 @@ describe('CRUD for class shoestore', {:type => :feature}) do
   it('lets you delete a shoe store') do
     test_store = create_shoe_store
     visit('/shoe_stores')
-    expect(page).to have_content('Nordstom')
+    within('tbody#shoe_data') do
+      expect(page).to have_content('Nordstom')
+    end
     click_button('Delete', visible: false)
-    expect(page).to_not have_content('Nordstom')
+    within('tbody#shoe_data') do
+      expect(page).to_not have_content('Nordstom')
+    end
   end
 
   it('will not create a record if name is left blank') do

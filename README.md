@@ -14,7 +14,7 @@ left blank.
 
 Install shoe app by cloning this repository:
 ```
-https://github.com/Mahonmr/
+https://github.com/Mahonmr/code_review_shoe_store_app.git
 ```
 ##DATABASE Instrunctions
 
@@ -26,22 +26,19 @@ Step 1 start mysql server
 mysql.server start
 ```
 
+Step 2 create database
+
 ```
-CREATE DATABASE shoe_tracker;
+rake db:create
+then go to mysql prompt and type "show databases;" to verify new db is there
 ```
 
-Step 2 sign in to mysql
+Step 3 sign in to mysql and verify database is there
 
 ```
 mysql -u root -p <enter>
 asks for password which is root
-```
-
-Step 3 create database and verify it is there
-
-```
-rake db:create
-then go to mysql prompt and type "show databases;" to verify new db is their
+then go to mysql prompt and type "show databases;" to verify new db is there
 ```
 
 Step 4 run migration to build the tables
